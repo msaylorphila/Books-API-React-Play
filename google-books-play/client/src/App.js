@@ -1,26 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 // import { googleBooks } from './utils/Api';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-   const googleBooks = async (query) => {
-    console.log('hello')
+  const googleBooks = async (query) => {
+    console.log("hello");
     try {
-      const getBook = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-    
-    const data = await getBook.json();
-    console.log(data);
+      const getBook = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${query}`
+      );
+
+      const data = await getBook.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
     }
-  
-  catch (error) {
-    console.log(error);
-  }}
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchQuery('')
+    setSearchQuery("");
     googleBooks(searchQuery);
   };
   return (
@@ -31,7 +33,11 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <form onSubmit={handleSearch}>
-          <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="...Search"></input>
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="...Search"
+          ></input>
           <button type="submit">Search</button>
         </form>
         <a
